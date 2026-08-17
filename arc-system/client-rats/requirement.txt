@@ -1,4 +1,6 @@
+﻿# RATS Backend — Python dependencies
+# Install with: pip install -r requirement.txt
+
 fastapi
-uvicorn
-websocket
-secsgem
+uvicorn[standard]
+websockets

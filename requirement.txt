@@ -1,4 +1,10 @@
+﻿# Root-level Python dependencies (shared across all backends)
+# Install with: pip install -r requirement.txt
+
+# RATS SECS/GEM Engine (arc-system/client-rats)
 fastapi
-uvicorn
-websocket
+uvicorn[standard]
+websockets
+
+# Section Manager — SECS/GEM machine connections (arc-system/section-manager)
 secsgem
