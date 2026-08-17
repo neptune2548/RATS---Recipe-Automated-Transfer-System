@@ -1,0 +1,110 @@
+/* DB Helvethaica X Thai Font — unicode-range isolates to Thai characters ONLY */
+@font-face {
+  font-family: 'DB Helvethaica X';
+  src: url('/fonts/DBHelvethaicaX.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-U+0E7F;
+  size-adjust: 120%;
+}
+
+@font-face {
+  font-family: 'DB Helvethaica X';
+  src: url('/fonts/DBHelvethaicaX-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-U+0E7F;
+  size-adjust: 120%;
+}
+
+@font-face {
+  font-family: 'DB Helvethaica X';
+  src: url('/fonts/DBHelvethaicaX-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-U+0E7F;
+  size-adjust: 120%;
+}
+
+/* Gotham — English / Latin characters only */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F, U+2200-22FF;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F, U+2200-22FF;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F, U+2200-22FF;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Universal Typography — enforce font on every element ─────────────────── */
+*, *::before, *::after, body, button, input, select, textarea,
+optgroup, option, code, pre, span, p, div, h1, h2, h3, h4, h5, h6, td, th {
+  font-family: 'Gotham', 'DB Helvethaica X', 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
+@layer base {
+  html {
+    font-size: 100%;
+  }
+  body {
+    font-family: 'Gotham', 'DB Helvethaica X', 'Inter', system-ui, -apple-system, sans-serif !important;
+    line-height: 1.5;
+  }
+}
+
+/* ── Navbar — prevent button text wrapping at any language ──────────────────  */
+header nav button {
+  white-space: nowrap !important;
+}
+
+@layer components {
+  /* Custom Industrial Styles */
+  .industrial-card {
+    @apply bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-md shadow-sm;
+  }
+
+  .industrial-card-header {
+    @apply bg-slate-100 dark:bg-slate-800/80 px-4 py-2.5 border-b border-slate-200 dark:border-slate-700/80 text-sm font-semibold flex items-center justify-between;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}

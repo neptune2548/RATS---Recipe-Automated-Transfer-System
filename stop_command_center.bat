@@ -1,0 +1,29 @@
+@echo off
+TITLE ARC Command Center — Shutdown
+color 0C
+
+echo.
+echo  ======================================================================
+echo  :               SHUTTING DOWN ALL ARC MICROSERVICES                  :
+echo  ======================================================================
+echo.
+
+echo  Killing RATS SECS/GEM Engine...
+powershell -Command "Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -match 'main\.py' -and $_.CommandLine -match 'python' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }" >nul 2>&1
+
+echo  Killing MEMS Telemetry Engine...
+powershell -Command "Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -match 'server\.py' -and $_.CommandLine -match 'python' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }" >nul 2>&1
+
+echo  Killing Section Manager and ALL hidden ghost workers...
+powershell -Command "Get-WmiObject Win32_Process | Where-Object { ($_.CommandLine -match 'manager\.py' -or $_.CommandLine -match 'worker\.py') -and $_.CommandLine -match 'python' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }" >nul 2>&1
+
+echo  Killing React Frontend Server...
+taskkill /F /IM node.exe >nul 2>&1
+
+echo.
+echo  ✅ All services have been successfully shut down!
+echo.
+echo  Cleaning up all terminal windows...
+taskkill /F /IM WindowsTerminal.exe >nul 2>&1
+taskkill /F /IM powershell.exe >nul 2>&1
+taskkill /F /IM cmd.exe >nul 2>&1

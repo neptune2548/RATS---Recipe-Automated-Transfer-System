@@ -1,0 +1,80 @@
+# ============================================================
+#  ARC Command Center V0.2  —  .gitignore
+#  Based on master-recipe-command-centerV0.1 patterns
+#  Extended for full-stack monorepo (Python + React/Node)
+# ============================================================
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Logs & runtime data ───────────────────────────────────────
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Sandbox / development scratch ─────────────────────────────
+sandbox/
+
+# ── Industrial UI redesign drafts (V0.1 pattern) ─────────────
+industrial-ui-redesign/
+
+# ── Node / React Frontend ─────────────────────────────────────
+node_modules/
+arc-system/client-shell/dist/
+arc-system/client-shell/.vite/
+arc-system/client-mems/mems-dashboard-component/node_modules/
+arc-system/client-mems/mems-dashboard-component/dist/
+.npm/
+.pnp
+.pnp.js
+
+# ── Environment & secrets ─────────────────────────────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+credentials_summary.txt
+*.secret
+*.key
+
+# ── OS / Editor artefacts ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+
+# ── Build outputs ─────────────────────────────────────────────
+dist/
+*.bak
+
+# ── Database dumps / local state ─────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+arc-system/server/db/*.json
+
+# ── Machine lists (local config, not source) ──────────────────
+machine_svid_list.txt
