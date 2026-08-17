@@ -3,8 +3,10 @@ import logging
 import os
 import time
 import sys
-
-sys.path.insert(0, r"C:\master-recipe-command-centerV0.2")  # root database.py
+from pathlib import Path
+# Derive project root dynamically — works on any machine regardless of install path
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]  # arc-system/client-rats -> project root
+sys.path.insert(0, str(_PROJECT_ROOT))
 from database import MACHINE_DB
 
 logging.basicConfig(level=logging.INFO)
@@ -15,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 
 def _send_command_and_wait(machine_id: str, cmd: dict, timeout: int = 30) -> dict:
     safe_id = machine_id.replace("#", "")
-    cmd_dir = os.path.join(r"C:\master-recipe-command-centerV0.2", "arc-system", "section-manager", "commands")
+    cmd_dir = str(_PROJECT_ROOT / "arc-system" / "section-manager" / "commands")
     os.makedirs(cmd_dir, exist_ok=True)
     
     cmd_path = os.path.join(cmd_dir, f"{safe_id}.json")
@@ -100,7 +102,7 @@ def run_pull(machine_id: str, log_callback=None) -> dict:
             return {"status": "ok", "message": "No recipes found.", "pulled": [], "skipped": []}
 
         # ── 3. Compare with local ─────────────────────────────────────────────
-        save_directory = "C:/master-recipe-command-centerV0.2/BondingProg"
+        save_directory = str(_PROJECT_ROOT / "BondingProg")
         os.makedirs(save_directory, exist_ok=True)
 
         def _strip_to_clean_name(filename):

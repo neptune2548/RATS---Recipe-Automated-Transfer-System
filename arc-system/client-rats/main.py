@@ -15,7 +15,10 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 import sys
-sys.path.insert(0, r"C:\master-recipe-command-centerV0.2")  # root database.py
+from pathlib import Path
+# Derive project root dynamically — works on any machine regardless of install path
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]  # arc-system/client-rats -> project root
+sys.path.insert(0, str(_PROJECT_ROOT))
 from database import MACHINE_DB, SERIAL_TO_MACHINE
 
 from testpull import run_pull
@@ -350,7 +353,7 @@ async def push_program(machine_id: str, body: dict | None = None) -> JSONRespons
 @app.get("/api/machines/{machine_id}/recipes")
 async def list_recipes(machine_id: str) -> JSONResponse:
     """List available .PWB recipe files from BondingProg root (excludes subdirs)."""
-    machine_dir = Path("C:/master-recipe-command-centerV0.2/BondingProg")
+    machine_dir = _PROJECT_ROOT / "BondingProg"
 
     recipes: list[str] = []
 
@@ -376,7 +379,7 @@ async def suggest_recipe(body: dict | None = None) -> JSONResponse:
     if not recipe_name:
         return JSONResponse({"error": "recipe_name is required"}, status_code=400)
 
-    target_dir = "C:/master-recipe-command-centerV0.2/BondingProg"
+    target_dir = str(_PROJECT_ROOT / "BondingProg")
 
     # Check if exact file exists (with .PWB extension)
     exact_path = f"{target_dir}/{recipe_name}.PWB"

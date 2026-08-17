@@ -24,8 +24,10 @@ import subprocess
 import sys
 import time
 
-# ── Add project root to path so we can import the root database.py ────────────
-sys.path.insert(0, r"C:\master-recipe-command-centerV0.2")
+from pathlib import Path
+# Derive project root dynamically — works on any machine regardless of install path
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]  # arc-system/section-manager -> project root
+sys.path.insert(0, str(_PROJECT_ROOT))
 
 from database import MACHINE_DB
 

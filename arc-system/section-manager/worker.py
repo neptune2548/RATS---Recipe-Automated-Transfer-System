@@ -34,8 +34,10 @@ import time
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-# ── Add project root to path so we can import the root database.py ────────────
-sys.path.insert(0, r"C:\master-recipe-command-centerV0.2")
+from pathlib import Path
+# Derive project root dynamically — works on any machine regardless of install path
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]  # arc-system/section-manager -> project root
+sys.path.insert(0, str(_PROJECT_ROOT))
 
 def _watch_parent():
     """Background thread that suicides if the manager's stdin pipe breaks."""
@@ -502,7 +504,7 @@ def _handle_pull_recipe(host, machine_id, cmd):
             else:
                 file_bytes = str(ppbody).encode("latin-1")
                 
-            save_directory = "C:/master-recipe-command-centerV0.2/BondingProg"
+            save_directory = str(_PROJECT_ROOT / "BondingProg")
             os.makedirs(save_directory, exist_ok=True)
             output_filename = f"{save_directory}/{target_recipe}.PWB"
             
@@ -572,7 +574,7 @@ def _handle_push_recipe(host, machine_id, cmd):
         write_command_result(machine_id, "error", {"EN": "No recipe name provided.", "TH": "ไม่ได้ระบุชื่อสูตร"})
         return
 
-    file_path = f"C:/master-recipe-command-centerV0.2/BondingProg/{recipe_name}.PWB"
+    file_path = str(_PROJECT_ROOT / "BondingProg" / f"{recipe_name}.PWB")
     if not os.path.exists(file_path):
         write_command_result(machine_id, "error", {"EN": f"Recipe file {recipe_name}.PWB not found locally.", "TH": f"ไม่พบไฟล์สูตร {recipe_name}.PWB ในเครื่อง"})
         return
@@ -581,7 +583,7 @@ def _handle_push_recipe(host, machine_id, cmd):
         file_bytes = f.read()
 
     target = MACHINE_DB[machine_id]
-    save_dir = "C:/master-recipe-command-centerV0.2/BondingProg"
+    save_dir = str(_PROJECT_ROOT / "BondingProg")
 
     # ═══════════════════════════════════════════════════════════════════════
     # STEP 0: Kill the main polling connection to free the HSMS slot
