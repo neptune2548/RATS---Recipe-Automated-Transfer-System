@@ -78,3 +78,8 @@ arc-system/server/db/*.json
 
 # ── Machine lists (local config, not source) ──────────────────
 machine_svid_list.txt
+
+# ── Production Bonding Programs — NEVER commit ────────────────
+BondingProg/
+*.PWB
+*.pwb
