@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-theme="light" style="height:100%">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f6f8" />
+  <title>RATS</title>
+  <meta name="description" content="SECS/GEM industrial recipe management and equipment control dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+
+<body style="height:100%; margin:0">
+
+  <div class="app-root">
+
+    <!-- ══════════════════════════════════════════════════════
+         TOP BAR
+    ══════════════════════════════════════════════════════ -->
+    <header class="top-bar">
+      <!-- Left — identity -->
+      <div class="top-bar-left">
+        <div class="top-bar-identity">
+          <!-- Logo images — swapped by CSS based on data-theme -->
+          <img src="assets/Stars - Original Logo.png" alt="Stars Logo" class="top-bar-logo logo-light" />
+          <img src="assets/Stars - White Logo_Transparent.png" alt="Stars Logo" class="top-bar-logo logo-dark" />
+          <div>
+            <p class="title">RATS</p>
+            <p class="label-xs" style="margin-top:1px"><span data-i18n="sys_id">RATS-PTT-001</span> // <span
+                data-i18n="version">v0.1t</span></p>
+          </div>
+        </div>
+
+        <div class="top-bar-subtitle">
+          <p data-i18n="page_subtitle">SECS/GEM COMMUNICATION CONTROL</p>
+        </div>
+      </div>
+
+      <!-- Right — status cluster -->
+      <div class="top-bar-right">
+        <!-- WS status -->
+        <div class="top-bar-conn">
+          <span id="connDot" class="conn-dot bg-warn pulse-warn"></span>
+          <span id="connText" class="conn-label text-warn">WS:CONNECTING</span>
+        </div>
+
+        <!-- Clock -->
+        <div class="top-bar-clock">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+          <span id="clock">00:00:00</span>
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="themeToggle" class="top-bar-theme" title="Toggle light/dark mode">
+          <span class="icon-wrap">
+            <!-- Sun icon (shown in dark mode to switch to light) -->
+            <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="5" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <!-- Moon icon (shown in light mode to switch to dark) -->
+            <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </span>
+        </button>
+
+        <!-- Language toggle -->
+        <button id="langToggle" class="top-bar-lang">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10A15 15 0 0 1 12 2z" />
+          </svg>
+          <span id="langLabel">TH</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════
+         SUBBAR — title + scan strip
+    ══════════════════════════════════════════════════════ -->
+    <div class="subbar">
+      <!-- Title -->
+      <div class="subbar-title">
+        <h1 data-i18n="page_title">RECIPE AUTOMATED TRANSFER SYSTEM</h1>
+      </div>
+
+      <!-- Scan strip — dynamic content rendered by JS -->
+      <div id="scanArea" class="subbar-scan full-width"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         BODY — split panel
+    ══════════════════════════════════════════════════════ -->
+    <div class="body-split">
+
+      <!-- LEFT — machine control panel -->
+      <div id="leftPanel" class="left-panel">
+        <!-- Rendered by JS: machine panel or awaiting state -->
+      </div>
+
+      <!-- RIGHT — terminal event log -->
+      <div class="right-panel">
+
+        <!-- Terminal header bar -->
+        <div class="terminal-header">
+          <div class="terminal-header-left">
+            <!-- Traffic light dots -->
+            <div class="traffic-dots">
+              <span class="red"></span>
+              <span class="yellow"></span>
+              <span class="green"></span>
+            </div>
+            <div class="divider"></div>
+            <span class="label-sm title" data-i18n="log_title">SYSTEM EVENT LOG</span>
+            <div class="live-tag">
+              <span class="dot pulse-ok"></span>
+              <span class="text" data-i18n="live_tag">LIVE</span>
+            </div>
+          </div>
+          <button id="clearLogBtn" class="purge-btn" data-i18n="clear_log_btn">PURGE</button>
+        </div>
+
+        <!-- Terminal output -->
+        <div id="eventLog" class="terminal-output">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         STATUS BAR (bottom)
+    ══════════════════════════════════════════════════════ -->
+    <footer class="status-bar">
+      <div class="status-bar-left">
+        <span class="label-xs">RATS // ระบบสื่อสาร SECS/GEM // RECIPE AUTOMATED TRANSFER SYSTEM</span>
+        <span id="footerMachineInfo"></span>
+      </div>
+      <div class="status-bar-right">
+        <span id="footerEventCount" class="label-xs">0 EVENTS</span>
+        <span class="divider">|</span>
+        <span id="footerClock"
+          style="font-size:10px;font-family:var(--font-mono);color:var(--muted-foreground);font-variant-numeric:tabular-nums">00:00:00</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="static/app.js"></script>
+</body>
+
+</html>
