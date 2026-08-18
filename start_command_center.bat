@@ -14,14 +14,7 @@ echo    [2] MEMS Telemetry Engine         (Python FastAPI — Port 8000)
 echo    [3] Section Manager               (SECS/GEM Connections — 12 Machines)
 echo    [4] ARC Command Center UI         (React App     — Port 3000)
 echo.
-echo  ──────────────────────────────────────────────────────────────────────
-echo   Default Passcodes:
-echo     Operator:      1111  (View Only)
-echo     Technician:    2222  (Push Recipe + Config)
-echo     Administrator: 3333  (Full System Control)
-echo  ──────────────────────────────────────────────────────────────────────
 echo.
-
 :: ── 1. RATS SECS/GEM Backend (Port 8080) ────────────────────────────────────
 echo  [%TIME%] Starting RATS SECS/GEM Engine...
 start "ARC — RATS SECS/GEM Engine (Port 8080)" /min cmd /c "cd /d "%~dp0arc-system\client-rats" && python main.py"

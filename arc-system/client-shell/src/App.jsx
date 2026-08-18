@@ -78,11 +78,8 @@ const GuestAuthPrompt = ({ onLogin }) => (
       <h2 className="font-header text-xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">Authorization Required</h2>
       <p className="text-sm text-slate-600 dark:text-slate-400 font-mono">
         Access to the <strong className="text-sky-600 dark:text-sky-400">RATS Command System</strong> requires an authenticated role.<br/>
-        Please log in as Operator, Technician, or Administrator to continue.
+        Please log in with your authorized credentials to continue.
       </p>
-      <div className="pt-2 font-mono text-xs text-slate-500 dark:text-slate-500 space-y-1">
-        <p>Operator: <strong>1111</strong> &nbsp;|&nbsp; Technician: <strong>2222</strong> &nbsp;|&nbsp; Admin: <strong>3333</strong></p>
-      </div>
       <button
         onClick={onLogin}
         className="mt-2 w-full px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg font-mono-industrial text-sm uppercase tracking-widest transition-colors shadow"

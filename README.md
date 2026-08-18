@@ -1,4 +1,4 @@
-﻿# RATS — Recipe Automated Transfer System
+# RATS — Recipe Automated Transfer System
 ### ARC Command Center V0.2
 
 A centralized control system for managing and transferring wire bonding recipes across 12 Wire Bonder machines (WB76-WB87) via the SECS/GEM protocol. Supports real-time status monitoring, Pull (retrieve), and Push (deploy) operations with a role-based authorization system.
@@ -116,12 +116,12 @@ Terminal 2:  cd arc-system/client-shell  ->  npm run dev
 
 Open http://localhost:3000 — you will see the "Authorization Required" screen.
 
-| Role | Passcode | Access |
-|---|---|---|
-| Guest | (no login) | Auth prompt only |
-| Operator | 1111 | View machine status and recipes |
-| Technician | 2222 | View + Pull / Push recipes |
-| Administrator | 3333 | Full control including system config |
+| Role | Description / Access |
+|---|---|
+| Guest | View authorization prompt only |
+| Operator | View machine status and recipes |
+| Technician | View + Pull / Push recipes |
+| Administrator | Full control including system configurations |
 
 Sessions auto-expire after 5 minutes of inactivity and persist across page refreshes.
 

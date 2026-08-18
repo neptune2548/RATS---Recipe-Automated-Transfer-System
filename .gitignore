@@ -79,6 +79,11 @@ arc-system/server/db/*.json
 # ── Machine lists (local config, not source) ──────────────────
 machine_svid_list.txt
 
+# ── Section Manager runtime state & commands ──────────────────
+arc-system/section-manager/state/*.json
+arc-system/section-manager/commands/*.json
+arc-system/section-manager/logs/*.log
+
 # ── Production Bonding Programs — NEVER commit ────────────────
 BondingProg/
 *.PWB
